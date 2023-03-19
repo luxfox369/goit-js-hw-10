@@ -1,22 +1,22 @@
 import fetchCountries from "./fetchCountries";
 import DEBOUNCE_DELAY from "./index";
 import debounce from "lodash.debounce";
+import Notiflix from "notiflix";
 
 const refs = {
     input: document.querySelector('#search-box'),
     list: document.querySelector('.country-list'),
     info: document.querySelector('.country-info'),
+   
 };
 document.body.insertAdjacentHTML('afterbegin', '<h2>REST Countries service</h2>');
 refs.input.style.width = "250px";
 //refs.input.innerHTML = "<input type='text' id='search-box' placeholder='Type name of country...' />";
 refs.input.cssText = "input::placeholder {  color: blue;  font-size: 1.2em;  font-style: italic;}";
 
-
-
-
 const debouncedInput = debounce(onSearch, DEBOUNCE_DELAY,{leading:true,trailing:false});
-refs.input.addEventListener('input',debouncedInput);
+refs.input.addEventListener('input', debouncedInput);
+
 
 function onSearch(e) {
    
@@ -39,8 +39,10 @@ function onSearch(e) {
               const  span_style = "style='display:inline-block; padding:10px; font-size:20px;font-weight:600px'";
               const  img_style = "style='width:70px; height:50px; display: inline-block ;padding-right:10px'";
               let markup = countries.map(({ name: { official }, flags: { svg } }) =>
-                `<li><img ${img_style} src="${svg}" alt="${official}"/><span ${span_style}>${official}</span></li>`).join('');
+                `<li class='item'><img ${img_style} src="${svg}" alt="${official}"/><span ${span_style}>${official}</span></li>`).join('');
               refs.list.innerHTML = markup; //додаємо список країн які містять в назві введені символи
+              refs.item = document.querySelector('.item');
+              refs.item.addEventListener('click', chooseItem); //клікнувши по item надається розширена інфа по цій країні
               refs.info.innerHTML = ""; //чистимо дані 1-ої країни
                         
              
@@ -60,8 +62,16 @@ function onSearch(e) {
           }
       })
       .catch((error) => {
-        console.log(error);
+       Notiflix.Notify.failure(error);
       })
   
 };
+function chooseItem(e) {
+  
+  if (e.target.nodeName !== "LI") {
+    return;
+  }
+    refs.input.value = e.target.textContent;
+    return fetchCountries(refs.input.value);
+  }
 
