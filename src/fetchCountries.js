@@ -1,5 +1,4 @@
 import Notiflix from "notiflix";
-
 export default fetchCountries ;
 const BASE_URL = 'https://restcountries.com/v3.1/name/'; //https://restcountries.com/v3.1/name/deutschland
 const API_KEY = "";
@@ -11,10 +10,10 @@ const OPTIONS = {
 };
 //https://restcountries.com/v3.1/name?fields=name,capital,currencies  
 //https://restcountries.com/v3.1/sweden?fields=name.official,capital,population,flags.svg,languages
-const searchParams = '?fields=name.official,capital,population,flags.svg,languages';
+const searchParams = '?fields=name,capital,population,flags,languages';
+
 function fetchCountries(name) {
  
-  name = name.trim();
   console.log(`${BASE_URL}${name}${searchParams}`);
   return fetch(`${BASE_URL}${name}${searchParams}`, OPTIONS) 
     .then(response => {
@@ -32,7 +31,7 @@ function fetchCountries(name) {
        return data;
     })
       .catch(error => {
-        console.error(error);
+        Notiflix.Notify.fault(error);
       });
   }
 
