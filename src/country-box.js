@@ -7,8 +7,7 @@ let arrayCountries = {};
 refs.h2 = document.querySelector('h2');
 if (!refs.h2) {
   refs.body.insertAdjacentHTML('afterbegin', '<h2>REST Countries service</h2>');
-  refs.h2 = document.querySelector('h2');
-}
+  }
 
 const debouncedInput = debounce(onSearch, DEBOUNCE_DELAY,{leading:true,trailing:false});
 refs.input.addEventListener('input', debouncedInput);
