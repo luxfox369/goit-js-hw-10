@@ -1,5 +1,5 @@
 import Notiflix from "notiflix";
-import { refs } from "./refs";
+//import resetResult from "./country-box";
 export default fetchCountries ;
 const BASE_URL = 'https://restcountries.com/v3.1/name/'; //https://restcountries.com/v3.1/name/deutschland
 const API_KEY = "";
@@ -20,8 +20,7 @@ function fetchCountries(name) {
     .then(response => {
          if (!response.ok) {
            Notiflix.Notify.failure("Oops, there is no country with that name");
-           refs.list.innerHTML = "";
-           refs.info.innerHTML = "";
+          // resetResult();
            return;
             }
         else return response.json();
@@ -30,8 +29,7 @@ function fetchCountries(name) {
       console.log("data.length ",data.length);
       if (data.length > 10) {
         Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
-        refs.list.innerHTML = "";
-        refs.info.innerHTML = "";
+       // resetResult();
         return;
       }
        return data;

@@ -45,8 +45,6 @@ button {
 }
 .span {
   display: block;
-  font-size: 20px;
-  font-weight: 600px;
 }
 .img {
   display: block;
@@ -60,4 +58,7 @@ button {
 }
 p {
   padding-left: 5px;
+  font-size: 20px;
+  font-weight: 600px;
+  font-style: italic;
 }

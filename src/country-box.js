@@ -2,6 +2,7 @@ import fetchCountries from "./fetchCountries";
 import {refs} from "./refs";
 //import { DEBOUNCE_DELAY } from "./index";
 import debounce from "lodash.debounce";
+
 const DEBOUNCE_DELAY = 300;
 let arrayCountries = {};
 
@@ -57,7 +58,7 @@ function markupList(listCountries) {
 function markupOne(country) {
    const { name: { official }, flags: { svg }, capital, population, languages } = country[0];
               const language = Object.values(languages).join(", ");
-              markup = `<img class="img large" src="${svg}" alt="${official}"/><p>Official name :<i>${official}</i></p><p> Capital :<i> ${capital}</i></p><p>Population :<i>${population}</i></p><p>Languages :<i>${language}</i></p>`;
+              markup = `<img class="img large" src="${svg}" alt="${official}"/><p>Official name :${official}</p><p> Capital : ${capital}</p><p>Population :${population}</p><p>Languages :${language}</p>`;
               refs.info.innerHTML = markup;
 }
 
@@ -73,7 +74,7 @@ function clickOnCountry(e) {
   markupOne(country);
 }
 
-function resetResult() {
+export function resetResult() {
     refs.list.innerHTML = "";
     refs.info.innerHTML = "";
   }
