@@ -17,8 +17,8 @@ refs.input.addEventListener('input', debouncedInput);
 function onSearch(e) {
    
   const searchCountry = e.target.value.trim();
-  if (searchCountry=== "") { //якщо коримтувач очистив input чистимо попередній показ
-    resetResult();
+  if (searchCountry=== "") { 
+    resetResult(); //якщо коримтувач очистив input чистимо попередній показ
     return;
   }
   fetchCountries(searchCountry)
@@ -30,27 +30,27 @@ function onSearch(e) {
         }
           if (countries) {
             if (countries.length > 1) {
-             // arrayCountries = { ...countries };
+              arrayCountries = { ...countries };
               resetResult();
               markupList(countries);
             //  refs.list.addEventListener('click', clickOnCountry ); //клікнувши по item надається розширена інфа по цій країні
             
             }
             else if (countries.length === 1) {
-             // arrayCountries == { ...countries };
+              arrayCountries == { ...countries };
               resetResult();
               markupOne(countries);
             }
           }
       })
       .catch((error) => {
-       console.log(error);
+       console.log('from catch ',error);
       })
   
 };
 function markupList(listCountries) {
-  let markup = listCountries.map(({ name: { official }, flags: { svg } }) =>
-                // `<li class='item'><img class="img" src="${svg}" alt="${official}"/><button type="button">${official}</button></li>`).join('');
+  const markup = listCountries.map(({ name: { official }, flags: { svg } }) =>
+      //для кліку по назіві // `<li class='item'><img class="img" src="${svg}" alt="${official}"/><button type="button">${official}</button></li>`).join('');
                     `<li class='item'><img class="img" src="${svg}" alt="${official}"/><span class="span">${official}</span></li>`).join('');
   refs.list.innerHTML = markup; //додаємо список країн які містять в назві введені символи
 }
@@ -58,7 +58,7 @@ function markupList(listCountries) {
 function markupOne(country) {
    const { name: { official }, flags: { svg }, capital, population, languages } = country[0];
               const language = Object.values(languages).join(", ");
-              markup = `<img class="img large" src="${svg}" alt="${official}"/><p>Official name :${official}</p><p> Capital : ${capital}</p><p>Population :${population}</p><p>Languages :${language}</p>`;
+             const   markup = `<img class="img large" src="${svg}" alt="${official}"/><p>Official name :${official}</p><p> Capital : ${capital}</p><p>Population :${population}</p><p>Languages :${language}</p>`;
               refs.info.innerHTML = markup;
 }
 
