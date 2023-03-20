@@ -15,6 +15,44 @@ body {
 #search-box {
   font: inherit;
   padding: 8px;
+  width: 250px;
   max-width: 320px;
   margin-bottom: 16px;
+}
+#search-box::placeholder {
+  color: blue;
+  font-size: 1.1em;
+  font-style: italic;
+}
+.country-list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 25px;
+  padding: 10px;
+  margin: 0;
+}
+.item {
+  display: flex;
+  gap: 20px;
+}
+button {
+  display: block;
+  /* font-size: 20px;
+  font-weight: 600px; */
+}
+.img {
+  display: block;
+  width: 70px;
+  height: 50px;
+  border: 1px #212121 solid;
+}
+.img.large {
+  width: 250px;
+  height: 150px;
+}
+p {
+  padding-left: 5px;
 }
