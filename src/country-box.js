@@ -8,7 +8,7 @@ let arrayCountries = {};
 
 refs.h2 = document.querySelector('h2');
 if (!refs.h2) {
-  refs.body.insertAdjacentHTML('afterbegin', '<h2>REST Countries service</h2>');
+  refs.body.insertAdjacentHTML('afterbegin', '<h3>Get Info about countries via a RESTful API</3>');
   }
 
 const debouncedInput = debounce(onSearch, DEBOUNCE_DELAY,{leading:true,trailing:false});
@@ -62,9 +62,18 @@ function markupList(listCountries) {
 
 function markupOne(countries) {
         //name:{common:"",official:"",} flags:{png:"http.....",srs:"http....",languages{"first","second"}
-   const { name: { official }, flags: { svg }, capital, population, languages } = countries[0]; 
-   const language = Object.values(languages).join(", "); //перебирає щначення ключів і склеює в пядок ,розділяючи символами ", "
-          const   markup = `<img class="img large" src="${svg}" alt="${official}"/><p>Official name :${official}</p><p> Capital : ${capital}</p><p>Population :${population}</p><p>Languages :${language}</p>`;
+   const { name: { official }, flags: { svg }, capital, population, languages,area,region,borders } = countries[0]; 
+  const language = Object.values(languages).join(", "); //перебирає щначення ключів і склеює в пядок ,розділяючи символами ", "
+  const border = borders.join(", "); // borders:(7) ['BLR', 'HUN', 'MDA', 'POL', 'ROU', 'RUS', 'SVK']
+  const markup = `<img class="img large" src="${svg}" alt="${official}"/>
+          <p class="para">Official name :<span> ${official}</span></p>
+          <p class="para">Capital city :<span> ${capital}</span></p>
+          <p class="para">Area :<span> ${area}</span></p>
+          <p class="para">Population : <span>${population}</span></p>
+          <p class="para">Languages : <span>${language}</span></p>
+          <p class="para">Region : <span>${region}</span></p>
+          <p class="para">Borders : <span>${border}</span></p>
+           `;
           refs.info.innerHTML = markup;
 }
 
