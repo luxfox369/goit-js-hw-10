@@ -20,17 +20,16 @@ function fetchCountries(name) {
     .then(response => {
       if (!response.ok) {
         Notiflix.Notify.failure("Oops, there is no country with that name");
-        // resetResult();
         return;
       }
-      else    return response.json();
+      else
+        return response.json();
        })
     .then((data) => {
-      console.log("data.length ", data.length);
-      console.log("data ",data);
+      //console.log("data.length ", data.length);
+      //console.log("data ",data);
       if (data.length > 10) {
         Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
-       // resetResult();
         return;
       }
        return data;

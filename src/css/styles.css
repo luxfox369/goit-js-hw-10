@@ -35,6 +35,9 @@ body {
   margin: 0;
 }
 .item {
+  padding: 5px;
+  border: 2px #ebe0e0 solid;
+  border-radius: 5%;
   display: flex;
   gap: 20px;
 }

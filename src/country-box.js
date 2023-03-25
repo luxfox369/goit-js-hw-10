@@ -54,7 +54,10 @@ function onSearch(e) {
 function markupList(listCountries) {
   const markup = listCountries.map(({ name: { official }, flags: { svg } }) =>
     //кнопка для кліку по назві
-    `<li class='item'><img class="img" src="${svg}" alt="${official}"/><button type="button">${official}</button></li>`).join('');
+    `<li class='item'>
+      <img class="img" src="${svg}" alt="${official}"/>
+      <p class="official">${official}</p>
+    </li>`).join('');
    //без кліка по назві
    // `<li class='item'><img class="img" src="${svg}" alt="${official}"/><span class="span">${official}</span></li>`).join('');
   refs.list.innerHTML = markup; //додаємо список країн які містять в назві комбінацію введених символів
@@ -78,11 +81,15 @@ function markupOne(countries) {
 }
 
 function clickOnCountry(e) {
+  console.log("currentTarget", e.currentTarget);
+  console.log("target", e.target.nextElementSibling);
+  if (e.target.nodeName === "P"){
+    refs.input.value = e.target.textContent; //при кліку yf текст p(official)(назва країни) заноситься в input
+}
+  if (e.target.nodeName === "IMG") {
+    refs.input.value = e.target.nextElementSibling.textContent;
+     }
  
-  if (e.target.nodeName !== "BUTTON") {
-    return;
-  }
-  refs.input.value = e.target.textContent; //при кліку текст кнопки(назва країни) заноситься в input
   resetResult(); //очищається список на екрані
   const country = Array.from(arrayCountries).find(country => country.name.official === refs.input.value); //витягає обєкт з масиву  списку країн
   const arrayForRender = [];
